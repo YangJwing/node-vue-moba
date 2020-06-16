@@ -2,7 +2,7 @@
  * @作者: Edwin Yeung
  * @Date: 2020-06-06 00:21:29
  * @修改人: Edwin Yeung
- * @LastEditTime: 2020-06-16 01:03:35
+ * @LastEditTime: 2020-06-16 15:26:53
  * @描述: 
  */
 module.exports = app => {
@@ -64,22 +64,16 @@ module.exports = app => {
     app.post('/admin/api/login', async (req, res) => {
         const { username, password } = req.body;
         // 1.根据用户名找用户
-        //前缀－被排除 前缀+被强制选择
-        const user = await AdminUser.findOne({ username }).select('+password');
+        const user = await AdminUser.findOne({ username }).select('+password');  // 前缀－被排除 前缀+被强制选择
         assert(user, 422, '用户不存在')
-        // if (!user) {
-        //     return res.status(422).send({
-        //         message: "用户不存在"
-        //     });
-        // }
-
         // 2.校验密码
         const isValid = require('bcrypt').compareSync(password, user.password)
         assert(isValid, 422, '密码错误')
         // 3.返回token
         const token = jwt.sign({ id: user._id }, app.get('secret'))
-        // res.send({token,user})
-        res.send({ token })
+        console.log({token,username})
+        res.send({token,username})
+        // res.send({ token })
     })
 
     // 错误处理函数
