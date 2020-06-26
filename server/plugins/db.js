@@ -2,7 +2,7 @@
  * @作者: Edwin Yeung
  * @Date: 2020-06-06 00:27:03
  * @修改人: Edwin Yeung
- * @LastEditTime: 2020-06-07 00:45:52
+ * @LastEditTime: 2020-06-25 14:00:45
  * @描述: 
  */
 module.exports = app => {
@@ -12,4 +12,7 @@ module.exports = app => {
         useUnifiedTopology: true,
         useFindAndModify: false
     })
+    
+    // 全部引用一遍模型
+    require('require-all')(__dirname + '/../models')
 }

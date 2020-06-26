@@ -2,7 +2,7 @@
  * @作者: Edwin Yeung
  * @Date: 2020-06-06 00:21:29
  * @修改人: Edwin Yeung
- * @LastEditTime: 2020-06-16 15:26:53
+ * @LastEditTime: 2020-06-25 13:23:50
  * @描述: 
  */
 module.exports = app => {
@@ -22,7 +22,7 @@ module.exports = app => {
         if (req.Model.modelName === 'Category' || req.Model.modelName === 'Article') {
             queryOptions.populate = 'parent'
         }
-        const model = await req.Model.find().setOptions(queryOptions).limit(10)
+        const model = await req.Model.find().setOptions(queryOptions).limit(100)
         res.send(model)
     })
     // 创建资源
